@@ -1,0 +1,29 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BACKEND_BASE_URL } from '@/config';
+import { LoginResponse, LoginParams } from './types';
+
+export const authApi = createApi({
+    reducerPath: 'authApi',
+
+    keepUnusedDataFor: 3600,
+
+    baseQuery: fetchBaseQuery({ baseUrl: BACKEND_BASE_URL }),
+
+    endpoints: (builder) => ({
+        login: builder.mutation<LoginResponse, LoginParams>({
+            query: (args) => {
+                const bodyFormData = new FormData();
+                bodyFormData.append('username', args.email);
+                bodyFormData.append('password', args.password);
+
+                return {
+                    method: 'POST',
+                    url: '/auth',
+                    body: bodyFormData,
+                };
+            },
+        }),
+    }),
+});
+
+export const { useLoginMutation } = authApi;

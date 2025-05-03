@@ -1,29 +1,25 @@
-import { Button, HStack, Text } from '@chakra-ui/react';
-import { Tooltip } from '@/components/ui/tooltip';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from './auth/routes/LoginPage';
+import RegisterPage from './auth/routes/RegisterPage';
+import MapTest from './MapTest';
 
 export default function App() {
     return (
-        <>
-            <Text
-                color="warning.fg"
-                backgroundColor="warning.bg"
-                animation="slide-from-bottom-full"
-                animationDuration="slowest"
-            >
-                Hello, World!
-            </Text>
-            <HStack>
-                <Tooltip content="Hello!">
-                    <Button
-                        colorPalette="red"
-                        variant="surface"
-                    >
-                        Click me
-                    </Button>
-                </Tooltip>
-
-                <Button>Click me</Button>
-            </HStack>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/auth/login"
+                    element={<LoginPage />}
+                />
+                <Route
+                    path="/register"
+                    element={<RegisterPage />}
+                />
+                <Route
+                    path="/map"
+                    element={<MapTest />}
+                />
+            </Routes>
+        </BrowserRouter>
     );
 }

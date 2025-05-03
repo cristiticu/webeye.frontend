@@ -6,6 +6,10 @@ const customConfig = defineConfig({
         html: {
             colorPalette: 'brand',
             fontFamily: 'body',
+            background: 'brand.500',
+        },
+        body: {
+            background: 'transparent',
         },
     },
     theme: {
