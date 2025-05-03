@@ -22,3 +22,18 @@ export type LoginResponse = {
     refresh_token: string;
     token_type: string;
 };
+
+export type RegisterParams = {
+    email: string;
+    password: string;
+    f_name: string;
+    l_name?: string;
+};
+
+export type RegisterResponse = {
+    guid: string;
+    email: string;
+    f_name: string;
+    l_name: string;
+    c_at: string;
+};

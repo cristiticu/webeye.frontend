@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { jwtDecode } from 'jwt-decode';
-import { AuthSliceState, LoginActionPayload, TokenData } from './types';
+import { AuthSliceState, LoginActionPayload } from './types';
+import { decodeAuthJwt, extractAuthStateFromCookie } from './utils';
 
 const initialState: AuthSliceState = {
     accessToken: '',
     refreshToken: '',
     userGuid: '',
+    ...extractAuthStateFromCookie(),
 };
 
 export const authSlice = createSlice({
@@ -14,11 +15,11 @@ export const authSlice = createSlice({
     reducers: {
         login: (state, action: PayloadAction<LoginActionPayload>) => {
             try {
-                const decoded = jwtDecode<TokenData>(action.payload.accessToken);
+                const userData = decodeAuthJwt(action.payload.accessToken);
 
                 state.accessToken = action.payload.accessToken;
                 state.refreshToken = action.payload.refreshToken;
-                state.userGuid = decoded.user_guid;
+                state.userGuid = userData.userGuid;
             } catch (_) {
                 console.error('Invalid JWT Token');
             }

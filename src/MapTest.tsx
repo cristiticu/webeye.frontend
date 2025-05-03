@@ -43,6 +43,7 @@ export default function MapTest() {
             width="100%"
             height="auto"
             overflow="hidden"
+            background="brand.500"
         >
             <ComposableMap
                 projectionConfig={{ scale: 150 }}

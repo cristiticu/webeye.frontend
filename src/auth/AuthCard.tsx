@@ -8,7 +8,7 @@ type Props = {
 
 export const AuthCard = ({ title, children }: Props) => (
     <Box className="auth-card">
-        <VStack>
+        <VStack className="card-stack">
             <Heading
                 className="auth-card-heading"
                 size="xl"

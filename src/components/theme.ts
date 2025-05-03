@@ -9,7 +9,7 @@ const customConfig = defineConfig({
             background: 'brand.500',
         },
         body: {
-            background: 'transparent',
+            background: 'bg.muted',
         },
     },
     theme: {

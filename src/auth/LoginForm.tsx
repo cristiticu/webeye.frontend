@@ -32,7 +32,7 @@ export default function LoginForm() {
         const validationErrors = validate({ email, password }, loginValidationRule);
 
         if (validationErrors) {
-            setValidationErrors(validationErrors);
+            setValidationErrors((_) => ({ ..._, ...validationErrors }));
             return;
         }
 
@@ -52,7 +52,7 @@ export default function LoginForm() {
                                 value={email}
                                 onChange={handleEmailChange}
                             />
-                            <Field.ErrorText>{validationErrors.email}</Field.ErrorText>
+                            <Field.ErrorText>{validationErrors.email[0]}</Field.ErrorText>
                         </Field.Root>
                         <Field.Root invalid={validationErrors.password?.length > 0}>
                             <Field.Label>Password</Field.Label>
@@ -62,7 +62,7 @@ export default function LoginForm() {
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
-                            <Field.ErrorText>{validationErrors.password}</Field.ErrorText>
+                            <Field.ErrorText>{validationErrors.password[0]}</Field.ErrorText>
                         </Field.Root>
                     </Fieldset.Content>
                     <Fieldset.ErrorText>{loginError}</Fieldset.ErrorText>
@@ -82,12 +82,12 @@ export default function LoginForm() {
                 color="gray.600"
                 textAlign="center"
             >
-                No account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link
                     asChild
                     color="brand.500"
                 >
-                    <RouterLink to="/register"> Register now</RouterLink>
+                    <RouterLink to="/register"> Register now!</RouterLink>
                 </Link>
             </Text>
         </AuthCard>
