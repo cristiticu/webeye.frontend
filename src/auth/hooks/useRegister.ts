@@ -27,6 +27,8 @@ export default function useRegister() {
                 } else {
                     setRegisterError('An error has occurred');
                 }
+
+                throw error;
             }
         },
         [dispatch, loginTrigger, registerTrigger]

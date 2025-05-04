@@ -1,6 +1,6 @@
 import { Button, Field, Fieldset, Input, Link, Stack, Text } from '@chakra-ui/react';
-import { AuthCard } from './AuthCard';
-import { Link as RouterLink } from 'react-router-dom';
+import AuthCard from './AuthCard';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { loginValidationRule } from './utils';
 import validate from 'validate.js';
@@ -14,6 +14,8 @@ const initialValidationErrors = {
 };
 
 export default function RegisterForm() {
+    const navigate = useNavigate();
+
     const [validationErrors, setValidationErrors] = useState(initialValidationErrors);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -51,6 +53,7 @@ export default function RegisterForm() {
         }
 
         await register(email, firstName, lastName || undefined, password);
+        navigate('/dashboard');
     };
 
     return (

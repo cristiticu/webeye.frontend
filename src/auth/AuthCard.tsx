@@ -6,16 +6,18 @@ type Props = {
     children?: ReactNode;
 };
 
-export const AuthCard = ({ title, children }: Props) => (
-    <Box className="auth-card">
-        <VStack className="card-stack">
-            <Heading
-                className="auth-card-heading"
-                size="xl"
-            >
-                {title}
-            </Heading>
-            {children}
-        </VStack>
-    </Box>
-);
+export default function AuthCard({ title, children }: Props) {
+    return (
+        <Box className="auth-card">
+            <VStack className="card-stack">
+                <Heading
+                    className="auth-card-heading"
+                    size="xl"
+                >
+                    {title}
+                </Heading>
+                {children}
+            </VStack>
+        </Box>
+    );
+}

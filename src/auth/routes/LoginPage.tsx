@@ -7,7 +7,7 @@ export default function LoginPage() {
     return (
         <Box className="auth-page">
             <Box className="auth-container">
-                <BrandTitle />
+                <BrandTitle size="large" />
                 <LoginForm />
             </Box>
         </Box>

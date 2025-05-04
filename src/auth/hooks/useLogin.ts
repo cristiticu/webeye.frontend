@@ -24,6 +24,8 @@ export default function useLogin() {
                 } else {
                     setLoginError('An error has occurred');
                 }
+
+                throw error;
             }
         },
         [dispatch, loginTrigger]

@@ -3,6 +3,7 @@ import LoginPage from './auth/routes/LoginPage';
 import RegisterPage from './auth/routes/RegisterPage';
 import MapTest from './MapTest';
 import ProtectedRoutes from './auth/ProtectedRoutes';
+import Layout from './Layout';
 
 export default function App() {
     return (
@@ -18,10 +19,20 @@ export default function App() {
                 />
 
                 <Route element={<ProtectedRoutes />}>
-                    <Route
-                        path="/map"
-                        element={<MapTest />}
-                    />
+                    <Route element={<Layout />}>
+                        <Route
+                            path="/dashboard"
+                            element={<>Hello, World!</>}
+                        />
+                        <Route
+                            path="/map"
+                            element={<MapTest />}
+                        />
+                        <Route
+                            path="/monitors"
+                            element={<>Monitors</>}
+                        />
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>
