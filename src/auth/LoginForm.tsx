@@ -4,7 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import useLogin from './hooks/useLogin';
 import { ChangeEvent, useState } from 'react';
 import { validate } from 'validate.js';
-import { loginValidationRule } from './utils';
+import { loginValidationRule } from './utils/validation';
 
 const initialValidationErrors = {
     email: [],

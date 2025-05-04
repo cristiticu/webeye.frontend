@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthSliceState, LoginActionPayload } from './types';
-import { decodeAuthJwt, extractAuthStateFromCookie } from './utils';
+import { decodeAuthJwt, extractAuthStateFromCookie } from './utils/token';
 
 const initialState: AuthSliceState = {
     accessToken: '',

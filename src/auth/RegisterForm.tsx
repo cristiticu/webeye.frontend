@@ -2,7 +2,7 @@ import { Button, Field, Fieldset, Input, Link, Stack, Text } from '@chakra-ui/re
 import AuthCard from './AuthCard';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
-import { loginValidationRule } from './utils';
+import { loginValidationRule } from './utils/validation';
 import validate from 'validate.js';
 import useRegister from './hooks/useRegister';
 

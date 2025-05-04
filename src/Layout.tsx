@@ -20,7 +20,7 @@ export default function Layout() {
     return (
         <Flex height="100vh">
             <Box
-                w="250px"
+                minWidth="250px"
                 background="gray.300"
                 boxShadow="md"
                 display="flex"
@@ -95,9 +95,12 @@ export default function Layout() {
                 </Flex>
 
                 <Box
-                    p={6}
-                    flex="1"
+                    p={0}
                     overflowY="auto"
+                    overflowX="auto"
+                    position="relative"
+                    width="100%"
+                    height="100%"
                 >
                     <Outlet />
                 </Box>
