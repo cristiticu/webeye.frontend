@@ -1,7 +1,7 @@
-import '../auth.less';
+import '../Auth.less';
 import { Box } from '@chakra-ui/react';
 import LoginForm from '../LoginForm';
-import BrandTitle from '@/shared/BrandTitle';
+import BrandTitle from '@/components/BrandTitle';
 
 export default function LoginPage() {
     return (

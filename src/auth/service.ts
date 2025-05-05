@@ -3,7 +3,7 @@ import { BACKEND_BASE_URL } from '@/config';
 import { LoginResponse, LoginParams, RegisterResponse, RegisterParams } from './types';
 
 export const authApi = createApi({
-    reducerPath: 'authApi',
+    reducerPath: 'api.auth',
 
     keepUnusedDataFor: 3600,
 

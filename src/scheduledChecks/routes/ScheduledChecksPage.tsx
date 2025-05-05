@@ -1,16 +1,13 @@
 import MonitoredWebpages from '@/monitoredWebpages/MonitoredWebpages';
 import { Container } from '@chakra-ui/react';
-import Test from '../Test';
 
-export default function DashboardPage() {
+export default function ScheduledChecksPage() {
     return (
         <Container
             paddingTop={6}
             position="absolute"
         >
-            <MonitoredWebpages>
-                <Test />
-            </MonitoredWebpages>
+            <MonitoredWebpages>Hello</MonitoredWebpages>
         </Container>
     );
 }

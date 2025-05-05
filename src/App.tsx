@@ -3,8 +3,9 @@ import LoginPage from './auth/routes/LoginPage';
 import RegisterPage from './auth/routes/RegisterPage';
 import MapTest from './MapTest';
 import ProtectedRoutes from './auth/ProtectedRoutes';
-import Layout from './Layout';
+import Layout from './components/layout/Layout';
 import DashboardPage from './dashboard/routes/DashboardPage';
+import ScheduledChecksPage from './scheduledChecks/routes/ScheduledChecksPage';
 
 export default function App() {
     return (
@@ -31,7 +32,7 @@ export default function App() {
                         />
                         <Route
                             path="/monitors"
-                            element={<>Monitors</>}
+                            element={<ScheduledChecksPage />}
                         />
                     </Route>
                 </Route>

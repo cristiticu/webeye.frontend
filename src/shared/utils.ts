@@ -10,3 +10,13 @@ export function getCookieJson(name: string) {
 
     return JSON.parse(cookie);
 }
+
+export function normalizeUrl(url: string) {
+    let normalizedUrl = url.toLowerCase().trim();
+
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+        normalizedUrl = 'https://'.concat(url);
+    }
+
+    return normalizedUrl;
+}

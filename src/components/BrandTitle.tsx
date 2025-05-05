@@ -1,4 +1,4 @@
-import './shared.less';
+import './BrandTitle.less';
 import { Box, Heading, Icon } from '@chakra-ui/react';
 import { AiOutlineEye } from 'react-icons/ai';
 
