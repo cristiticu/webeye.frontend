@@ -6,7 +6,7 @@ import { AiFillSnippets, AiFillSignal, AiFillEye } from 'react-icons/ai';
 
 const menuItems = {
     dashboard: 'Dashboard',
-    monitors: 'Monitor Details',
+    monitors: 'Monitors',
     events: 'Events & Downtimes',
     map: 'Map',
     placeholder_2: 'Placeholder',

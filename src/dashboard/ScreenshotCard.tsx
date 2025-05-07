@@ -30,7 +30,7 @@ export default function ScreenshotCard({ webpageGuid, userGuid }: Props) {
                         loading="lazy"
                         src={`${SCREENSHOT_STORAGE_URL}/${userGuid}/${webpageGuid}.jpg`}
                         alt="Webpage screenshot"
-                        borderRadius="md"
+                        borderRadius="lg"
                         objectFit="cover"
                         onError={() => setScreenshotError(true)}
                         w="100%"
