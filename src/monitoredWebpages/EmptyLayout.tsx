@@ -24,8 +24,8 @@ export default function EmptyLayout() {
                     color="gray.600"
                     maxW="md"
                 >
-                    Start monitoring your site&apos;s uptime and performance in real-time from 21 locations across 3 global regions. Stay ahead of downtime with
-                    precise, distributed checks.
+                    Start monitoring your site&apos;s loading performance and uptime in real-time from 21 global locations across 3 continents. Stay ahead of
+                    downtime with precise, distributed checks and diagnose loading issues with no hassle.
                 </Text>
                 <AddMonitoredWebpageButton type="full" />
             </VStack>
