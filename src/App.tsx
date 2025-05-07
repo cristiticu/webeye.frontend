@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from './auth/routes/LoginPage';
 import RegisterPage from './auth/routes/RegisterPage';
 import MapTest from './MapTest';
@@ -11,6 +11,10 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route
+                    path="/"
+                    element={<Navigate to="/dashboard" />}
+                />
                 <Route
                     path="/auth/login"
                     element={<LoginPage />}

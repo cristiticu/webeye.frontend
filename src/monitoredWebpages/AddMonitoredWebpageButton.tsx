@@ -5,10 +5,10 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import AddMonitoredWebpage from './wizard/AddMonitoredWebpage';
 
 type Props = {
-    size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '2xs' | 'xs';
+    type: 'full' | 'small';
 };
 
-export default function AddMonitoredWebpageButton({ size = 'xl' }: Props) {
+export default function AddMonitoredWebpageButton({ type }: Props) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -16,13 +16,16 @@ export default function AddMonitoredWebpageButton({ size = 'xl' }: Props) {
         <>
             <Tooltip content="Monitor a new webpage">
                 <Button
-                    borderRadius="0"
-                    size={size}
+                    borderRadius={type === 'small' ? '0' : undefined}
+                    size={type === 'small' ? 'xl' : 'md'}
                     onClick={() => setIsModalOpen(true)}
                 >
-                    <Icon>
-                        <AiOutlinePlus />
-                    </Icon>
+                    {type === 'small' && (
+                        <Icon>
+                            <AiOutlinePlus />
+                        </Icon>
+                    )}
+                    {type === 'full' && <>Add Your First Webpage</>}
                 </Button>
             </Tooltip>
 

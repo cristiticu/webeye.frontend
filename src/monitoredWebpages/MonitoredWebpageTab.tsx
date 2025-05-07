@@ -15,7 +15,7 @@ export default function MonitoredWebpageTab({ guid, url }: Props) {
             alignItems="center"
             className="tab"
         >
-            <Tabs.Trigger value={url}>{url}</Tabs.Trigger>
+            <Tabs.Trigger value={guid}>{url}</Tabs.Trigger>
 
             <Menu.Root>
                 <Menu.Trigger asChild>

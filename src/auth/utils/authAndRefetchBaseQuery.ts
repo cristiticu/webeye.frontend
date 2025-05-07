@@ -1,10 +1,10 @@
 import { BACKEND_BASE_URL } from '@/config';
-import { eraseCookie } from '@/shared/cookie';
 import { RootState } from '@/store';
 import { BaseQueryApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
-import { login, logout } from '../slice';
+import { login } from '../slice';
 import { LoginResponse } from '../types';
 import { setCookieJson } from '@/shared/utils';
+import logout from './logout';
 
 type AuthBaseQueryParams = {
     baseUrl: string;
@@ -61,7 +61,6 @@ export default function authAndRefetchBaseQuery({ baseUrl }: Params) {
             const refreshResponse = await refresh('', api, extraOptions);
 
             if (refreshResponse.error) {
-                eraseCookie('webeye.tokens');
                 dispatch(logout());
 
                 return response;

@@ -1,7 +1,7 @@
 import BrandTitle from '@/components/BrandTitle';
+import { usePreservedNavigate } from '@/shared/hooks/usePreservedNavigate';
 import { Box, VStack, Button } from '@chakra-ui/react';
 import { IconType } from 'react-icons/lib';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
     menuItems: Record<string, string>;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function MenuBar({ menuItems, selectedMenu, menuIcons }: Props) {
-    const navigate = useNavigate();
+    const navigate = usePreservedNavigate();
 
     return (
         <Box

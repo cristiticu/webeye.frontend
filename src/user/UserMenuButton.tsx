@@ -1,19 +1,16 @@
 import { Button, Icon } from '@chakra-ui/react';
 import { AiOutlineUser } from 'react-icons/ai';
-import { useFetchUserQuery } from './service';
-import { useAppSelector } from '@/store';
-import { skipToken } from '@reduxjs/toolkit/query';
+import useGetAuthenticatedUser from './hooks/useGetAuthenticatedUser';
 
 export default function UserMenuButton() {
-    const userGuid = useAppSelector((state) => state.auth.userGuid);
-    const { data: user, isLoading } = useFetchUserQuery(userGuid ? { guid: userGuid } : skipToken);
+    const { user, isLoadingUser } = useGetAuthenticatedUser();
 
     return (
         <Button
             variant="ghost"
             color="gray.100"
             height={'100%'}
-            loading={isLoading}
+            loading={isLoadingUser}
             disabled={!user}
         >
             {user?.f_name}{' '}
