@@ -9,6 +9,7 @@ import useRegister from './hooks/useRegister';
 const initialValidationErrors = {
     email: [],
     password: [],
+    passwordVerify: [],
     firstName: [],
     lastName: [],
 };
@@ -19,6 +20,7 @@ export default function RegisterForm() {
     const [validationErrors, setValidationErrors] = useState(initialValidationErrors);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [passwordVerify, setPasswordVerify] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
 
@@ -44,11 +46,27 @@ export default function RegisterForm() {
         setValidationErrors((_) => ({ ..._, password: [] }));
     };
 
+    const handlePasswordVerifyChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setPasswordVerify(event.target.value);
+        setValidationErrors((_) => ({ ..._, passwordVerify: [] }));
+    };
+
     const handleRegisterButtonClick = async () => {
+        let hasErrors = false;
+
         const validationErrors = validate({ email, password, firstName, lastName: lastName || undefined }, loginValidationRule);
 
         if (validationErrors) {
             setValidationErrors((_) => ({ ..._, ...validationErrors }));
+            hasErrors = true;
+        }
+
+        if (passwordVerify !== password) {
+            setValidationErrors((_) => ({ ..._, passwordVerify: ["Password don't match"] }));
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
             return;
         }
 
@@ -76,6 +94,7 @@ export default function RegisterForm() {
                             />
                             <Field.ErrorText>{validationErrors.email[0]}</Field.ErrorText>
                         </Field.Root>
+
                         <Field.Root
                             required
                             invalid={validationErrors.firstName?.length > 0}
@@ -91,6 +110,7 @@ export default function RegisterForm() {
                             />
                             <Field.ErrorText>{validationErrors.firstName[0]}</Field.ErrorText>
                         </Field.Root>
+
                         <Field.Root invalid={validationErrors.lastName?.length > 0}>
                             <Field.Label>Last Name</Field.Label>
                             <Input
@@ -101,6 +121,7 @@ export default function RegisterForm() {
                             />
                             <Field.ErrorText>{validationErrors.lastName[0]}</Field.ErrorText>
                         </Field.Root>
+
                         <Field.Root
                             required
                             invalid={validationErrors.password?.length > 0}
@@ -115,6 +136,23 @@ export default function RegisterForm() {
                                 onChange={handlePasswordChange}
                             />
                             <Field.ErrorText>{validationErrors.password[0]}</Field.ErrorText>
+                        </Field.Root>
+
+                        <Field.Root
+                            required
+                            invalid={validationErrors.passwordVerify?.length > 0}
+                        >
+                            <Field.Label>
+                                Verify your password <Field.RequiredIndicator />
+                            </Field.Label>
+                            <Input
+                                name="password-verify"
+                                type="password"
+                                placeholder="••••••••"
+                                value={passwordVerify}
+                                onChange={handlePasswordVerifyChange}
+                            />
+                            <Field.ErrorText>{validationErrors.passwordVerify[0]}</Field.ErrorText>
                         </Field.Root>
                     </Fieldset.Content>
                     <Fieldset.ErrorText>{registerError}</Fieldset.ErrorText>
