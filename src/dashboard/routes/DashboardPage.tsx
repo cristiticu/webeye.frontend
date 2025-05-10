@@ -15,6 +15,7 @@ export default function DashboardPage() {
                 <Dashboard
                     key={webpage?.guid || 'no-website'}
                     webpageGuid={webpage?.guid}
+                    webpageUrl={webpage?.url}
                 />
             </MonitoredWebpages>
         </Container>

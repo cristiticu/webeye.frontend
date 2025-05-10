@@ -1,21 +1,28 @@
 import useGetAuthenticatedUser from '@/user/hooks/useGetAuthenticatedUser';
-import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import ScreenshotCard from './ScreenshotCard';
+import MapCard from './MapCard';
+import CurrentStatusCard from './CurrentStatusCard';
+import RecentEventsCard from './RecentEventsCard';
+import AverageLoadingSpeedCard from './AverageLoadingSpeedCard';
+import UptimeCard from './UptimeCard';
 
 type Props = {
     webpageGuid: string;
+    webpageUrl: string;
 };
 
-export default function Dashboard({ webpageGuid }: Props) {
+export default function Dashboard({ webpageGuid, webpageUrl }: Props) {
     const { user } = useGetAuthenticatedUser();
 
     return (
         <Grid
-            templateColumns="repeat(12, 1fr)"
+            templateColumns="repeat(24, 1fr)"
+            templateRows="repeat(4, auto)"
             gap={6}
         >
             <GridItem
-                colSpan={{ base: 12, md: 6 }}
+                colSpan={12}
                 rowSpan={2}
                 border="1px solid"
                 borderColor="gray.300"
@@ -28,40 +35,59 @@ export default function Dashboard({ webpageGuid }: Props) {
                 />
             </GridItem>
 
-            {/* Uptime Widget */}
             <GridItem
-                colSpan={{ base: 12, md: 3 }}
+                colSpan={6}
+                rowSpan={1}
                 border="1px solid"
                 borderColor="gray.300"
                 borderRadius="xl"
                 p={4}
             >
-                <Text fontWeight="bold">Uptime</Text>
-                <Box mt={4}>Uptime data goes here</Box>
+                <CurrentStatusCard webpageUrl={webpageUrl} />
             </GridItem>
 
-            {/* Latency Chart */}
             <GridItem
-                colSpan={{ base: 12, md: 3 }}
+                colSpan={6}
+                rowSpan={2}
                 border="1px solid"
                 borderColor="gray.300"
                 borderRadius="xl"
                 p={4}
             >
-                <Text fontWeight="bold">Latency (ms)</Text>
-                <Box mt={4}>Latency chart goes here</Box>
+                <RecentEventsCard webpageUrl={webpageUrl} />
             </GridItem>
 
-            {/* Events Log */}
             <GridItem
-                colSpan={{ base: 12, md: 6 }}
+                colSpan={6}
+                rowSpan={1}
                 border="1px solid"
                 borderColor="gray.300"
                 borderRadius="xl"
                 p={4}
             >
-                <Text fontWeight="bold">Recent Events</Text>
-                <Box mt={4}>Event logs or table</Box>
+                <AverageLoadingSpeedCard webpageUrl={webpageUrl} />
+            </GridItem>
+
+            <GridItem
+                colSpan={24}
+                rowSpan={1}
+                border="1px solid"
+                borderColor="gray.300"
+                borderRadius="xl"
+                p={4}
+            >
+                <UptimeCard webpageUrl={webpageUrl} />
+            </GridItem>
+
+            <GridItem
+                colSpan={24}
+                rowSpan={1}
+                border="1px solid"
+                borderColor="gray.300"
+                borderRadius="xl"
+                p={4}
+            >
+                <MapCard webpageUrl={webpageUrl} />
             </GridItem>
         </Grid>
     );

@@ -8,7 +8,7 @@ const initialValidationErrors = {
 };
 
 const availableRegions = {
-    americas: 'Americas',
+    america: 'Americas',
     europe: 'Europe',
     asia_pacific: 'Asia Pacific',
 };

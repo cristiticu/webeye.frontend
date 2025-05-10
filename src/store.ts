@@ -5,6 +5,7 @@ import { authApi } from './auth/service';
 import { monitoredWebpagesApi } from './monitoredWebpages/service';
 import { userApi } from './user/service';
 import { scheduledChecksApi } from './scheduledChecks/service';
+import { monitoringEventsApi } from './monitoringEvents/service';
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         [userApi.reducerPath]: userApi.reducer,
         [monitoredWebpagesApi.reducerPath]: monitoredWebpagesApi.reducer,
         [scheduledChecksApi.reducerPath]: scheduledChecksApi.reducer,
+        [monitoringEventsApi.reducerPath]: monitoringEventsApi.reducer,
     },
 
     middleware: (getDefaultMiddleware) =>
@@ -20,7 +22,8 @@ export const store = configureStore({
             .concat(authApi.middleware)
             .concat(monitoredWebpagesApi.middleware)
             .concat(userApi.middleware)
-            .concat(scheduledChecksApi.middleware),
+            .concat(scheduledChecksApi.middleware)
+            .concat(monitoringEventsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

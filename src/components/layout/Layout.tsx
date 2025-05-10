@@ -8,8 +8,6 @@ const menuItems = {
     dashboard: 'Dashboard',
     monitors: 'Monitors',
     events: 'Events & Downtimes',
-    map: 'Map',
-    placeholder_2: 'Placeholder',
 };
 
 const menuIcons = {

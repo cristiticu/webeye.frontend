@@ -9,7 +9,7 @@
 
         "esModuleInterop": true,
         "jsx": "react-jsx",
-        "lib": ["ES2018", "DOM"],
+        "lib": ["ES2019", "DOM"],
         "forceConsistentCasingInFileNames": true
     }
 }

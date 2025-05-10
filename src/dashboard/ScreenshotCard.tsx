@@ -1,7 +1,7 @@
+import NoEventsFiller from '@/components/NoEventsFiller';
 import { SCREENSHOT_STORAGE_URL } from '@/config';
-import { Flex, Heading, Icon, Image, Skeleton, StackSeparator, Text, VStack } from '@chakra-ui/react';
+import { Heading, Image, Skeleton, StackSeparator, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { MdImageNotSupported } from 'react-icons/md';
 
 type Props = {
     webpageGuid?: string;
@@ -38,23 +38,7 @@ export default function ScreenshotCard({ webpageGuid, userGuid }: Props) {
                     />
                 )}
 
-                {screenshotError && (
-                    <Flex
-                        w="100%"
-                        h="300px"
-                        borderRadius="md"
-                        bg="gray.100"
-                        direction="column"
-                        align="center"
-                        justify="center"
-                    >
-                        <Icon>
-                            <MdImageNotSupported />
-                        </Icon>
-
-                        <Text color="gray.500">No events yet</Text>
-                    </Flex>
-                )}
+                {screenshotError && <NoEventsFiller />}
             </Skeleton>
         </VStack>
     );

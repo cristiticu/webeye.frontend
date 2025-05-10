@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from './auth/routes/LoginPage';
 import RegisterPage from './auth/routes/RegisterPage';
-import MapTest from './MapTest';
 import ProtectedRoutes from './auth/ProtectedRoutes';
 import Layout from './components/layout/Layout';
 import DashboardPage from './dashboard/routes/DashboardPage';
@@ -29,10 +28,6 @@ export default function App() {
                         <Route
                             path="/dashboard"
                             element={<DashboardPage />}
-                        />
-                        <Route
-                            path="/map"
-                            element={<MapTest />}
                         />
                         <Route
                             path="/monitors"
