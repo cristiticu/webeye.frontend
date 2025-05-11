@@ -2,6 +2,9 @@ export const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
 export const SCREENSHOT_STORAGE_URL = import.meta.env.VITE_SCREENSHOT_STORAGE_URL || '';
 export const HAR_STORAGE_URL = import.meta.env.VITE_HAR_STORAGE_URL || '';
 
+export const GENERAL_CONTEXT_LONG_POLLING_MS = 60 * 1000;
+export const REGIONS_STATUS_LONG_POLLING_MS = 60 * 1000;
+
 export const REGION_DATA = {
     'us-east-1': { name: 'North Virginia' },
     'us-east-2': { name: 'Ohio' },

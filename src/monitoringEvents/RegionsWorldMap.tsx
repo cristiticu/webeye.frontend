@@ -52,28 +52,27 @@ export default function RegionsWorldMap({ regionsStatus, width, height }: Props)
                 width="100%"
                 style={{ display: 'block' }}
             >
-                <chakra.svg fill="brand.500">
-                    <image
-                        href="/worldMap.svg"
-                        x="0"
-                        y="0"
-                        width={originalWidth}
-                        height={originalHeight}
-                        preserveAspectRatio="xMidYMid meet"
-                    />
-                </chakra.svg>
+                <image
+                    href="/worldMap.svg"
+                    x="0"
+                    y="0"
+                    width={originalWidth}
+                    height={originalHeight}
+                    preserveAspectRatio="xMidYMid meet"
+                />
 
                 {regions.map(({ key, coordinates, name }) => {
                     const { x, y } = projectCoords(coordinates[0], coordinates[1]);
 
-                    const fill = regionsStatus[key]?.status === 'up' ? 'success' : regionsStatus[key]?.status === 'down' ? 'danger' : 'gray.400';
+                    const fill = regionsStatus[key]?.status === 'up' ? 'green.500' : regionsStatus[key]?.status === 'down' ? 'red.500' : 'gray.400';
+                    const stroke = regionsStatus[key]?.status === 'up' ? 'green.700' : regionsStatus[key]?.status === 'down' ? 'red.700' : 'gray.700';
 
                     return (
                         <Popover.Root key={key}>
                             <Popover.Trigger asChild>
                                 <chakra.svg
                                     fill={fill}
-                                    stroke="gray.500"
+                                    stroke={stroke}
                                 >
                                     <circle
                                         cx={x}

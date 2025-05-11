@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon';
 import { useFetchEventsQuery } from '../service';
 import { useMemo } from 'react';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 type Props = {
-    url: string;
+    url?: string;
     startAt: DateTime;
     endAt: DateTime;
     maxEvents?: number;
@@ -13,7 +14,9 @@ export default function useGetMonitoringEvents({ url, startAt, endAt, maxEvents 
     const formattedStartAt = endAt.startOf('day').toISO();
     const formattedEndAt = endAt.endOf('day').toISO();
 
-    const { data: eventsForDay, isLoading: isLoadingEvents } = useFetchEventsQuery({ url, start_at: formattedStartAt, end_at: formattedEndAt });
+    const { data: eventsForDay, isLoading: isLoadingEvents } = useFetchEventsQuery(
+        url ? { url, start_at: formattedStartAt, end_at: formattedEndAt } : skipToken
+    );
 
     const filteredEvents = useMemo(
         () =>

@@ -1,3 +1,4 @@
+import { GENERAL_CONTEXT_LONG_POLLING_MS } from '@/config';
 import { useFetchGeneralContextQuery } from '@/monitoringEvents/service';
 import { formatPrettyTimestamp } from '@/shared/utils';
 import { Heading, Skeleton, StackSeparator, Text, VStack } from '@chakra-ui/react';
@@ -14,7 +15,9 @@ type Props = {
 };
 
 export default function CurrentStatusCard({ webpageUrl }: Props) {
-    const { data: generalContext, isLoading: isLoadingGeneralContext } = useFetchGeneralContextQuery(webpageUrl ? { url: webpageUrl } : skipToken);
+    const { data: generalContext, isLoading: isLoadingGeneralContext } = useFetchGeneralContextQuery(webpageUrl ? { url: webpageUrl } : skipToken, {
+        pollingInterval: GENERAL_CONTEXT_LONG_POLLING_MS,
+    });
 
     return (
         <VStack

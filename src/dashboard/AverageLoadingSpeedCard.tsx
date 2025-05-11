@@ -15,7 +15,7 @@ export default function AverageLoadingSpeedCard({ webpageUrl }: Props) {
 
     const averageLoadingSpeed =
         events && events.length > 0
-            ? events.reduce((acc, event) => acc + Number.parseInt(event.results['dom-content-loaded']), 0) / events.length / 1000
+            ? events.reduce((acc, event) => acc + (event.results ? Number.parseInt(event.results['dom-content-loaded']) : 0), 0) / events.length / 1000
             : undefined;
 
     return (

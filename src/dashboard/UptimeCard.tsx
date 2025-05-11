@@ -3,6 +3,8 @@ import { Box, Flex, Heading, HStack, Link, Skeleton, StackSeparator, VStack } fr
 import { DateTime } from 'luxon';
 import { Link as RouterLink } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useFetchGeneralContextQuery } from '@/monitoringEvents/service';
+import { skipToken } from '@reduxjs/toolkit/query/react';
 
 const now = DateTime.now().toUTC();
 const currentHour = now.toLocal().hour;
@@ -15,6 +17,22 @@ type Props = {
 
 export default function UptimeCard({ webpageUrl }: Props) {
     const { downtimes, isLoadingDowntimes } = useGetDowntimes({ url: webpageUrl, endAt: now });
+    const { data: generalContext, isLoading: isLoadingGeneralContext } = useFetchGeneralContextQuery(webpageUrl ? { url: webpageUrl } : skipToken);
+
+    const currentDowntimeHours = useMemo(() => {
+        if (!generalContext?.downtime_s_at) {
+            return [];
+        }
+
+        const start = DateTime.fromISO(generalContext.downtime_s_at);
+        let startHour = start.hour;
+
+        if (!now.hasSame(start, 'day')) {
+            startHour = 0;
+        }
+
+        return Array.from({ length: 24 - startHour }, (_, i) => startHour + i);
+    }, [generalContext]);
 
     const downtimeHours = useMemo(
         () =>
@@ -27,9 +45,13 @@ export default function UptimeCard({ webpageUrl }: Props) {
                           return Array.from({ length: endHour - startHour + 1 }, (_, i) => startHour + i);
                       })
                       .flat()
-                : undefined,
+                : [],
         [downtimes]
     );
+
+    const allDowntimeHours = [...currentDowntimeHours, ...downtimeHours];
+
+    const isLoading = isLoadingDowntimes || isLoadingGeneralContext;
 
     return (
         <VStack
@@ -41,7 +63,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
                 justifyContent="space-between"
                 width="100%"
             >
-                <Heading alignSelf="self-start">Uptime (last 24 hours)</Heading>
+                <Heading alignSelf="self-start">Today&apos;s Uptime</Heading>
                 <Link asChild>
                     <RouterLink to="/downtime">See All</RouterLink>
                 </Link>
@@ -49,7 +71,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
 
             <Skeleton
                 variant="pulse"
-                loading={isLoadingDowntimes}
+                loading={isLoading}
             >
                 <HStack
                     align="center"
@@ -58,7 +80,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
                     gap="8px"
                 >
                     {ticks.map((_, index) => {
-                        const isDowntime = downtimeHours?.includes(index);
+                        const isDowntime = allDowntimeHours?.includes(index);
                         const isInFuture = index > currentHour;
 
                         return (
@@ -66,7 +88,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
                                 key={index}
                                 width="12px"
                                 height="36px"
-                                backgroundColor={isDowntime ? 'red.500' : isInFuture ? 'gray.300' : 'green.500'}
+                                backgroundColor={isInFuture ? 'gray.300' : isDowntime ? 'red.500' : 'green.500'}
                                 borderRadius="4px"
                             />
                         );
@@ -76,3 +98,10 @@ export default function UptimeCard({ webpageUrl }: Props) {
         </VStack>
     );
 }
+
+//  <Text
+//     fontSize="xs"
+//     color="gray.500"
+// >
+//     {((index + 11) % 12) + 1} {index > 12 ? 'PM' : 'AM'}
+// </Text>
