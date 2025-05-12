@@ -6,6 +6,7 @@ import ProtectedRoutes from './auth/ProtectedRoutes';
 import Layout from './components/layout/Layout';
 import DashboardPage from './dashboard/routes/DashboardPage';
 import ScheduledChecksPage from './scheduledChecks/routes/ScheduledChecksPage';
+import AddScheduledCheckPage from './scheduledChecks/routes/AddScheduledCheckPage';
 
 export default function App() {
     return (
@@ -34,6 +35,10 @@ export default function App() {
                             <Route
                                 path="/monitors"
                                 element={<ScheduledChecksPage />}
+                            />
+                            <Route
+                                path="/monitors/add"
+                                element={<AddScheduledCheckPage />}
                             />
                         </Route>
                     </Route>

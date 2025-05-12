@@ -1,6 +1,7 @@
 import { Tabs, Menu, Button, Flex, Icon, Portal } from '@chakra-ui/react';
-import { AiOutlineMore, AiOutlineDelete, AiOutlineControl } from 'react-icons/ai';
+import { AiOutlineMore, AiOutlineControl } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import DeleteMonitoredWebpageButton from './DeleteMonitoredWebpageButton';
 
 type Props = {
     guid: string;
@@ -46,10 +47,7 @@ export default function MonitoredWebpageTab({ guid, url }: Props) {
                                 color="fg.error"
                                 _hover={{ bg: 'bg.error', color: 'fg.error' }}
                             >
-                                <Icon>
-                                    <AiOutlineDelete />
-                                </Icon>
-                                Remove
+                                <DeleteMonitoredWebpageButton webpageUrl={url} />
                             </Menu.Item>
                         </Menu.Content>
                     </Menu.Positioner>

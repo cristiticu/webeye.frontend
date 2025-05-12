@@ -1,8 +1,8 @@
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useFetchScheduledChecksQuery } from './service';
 import EmptyLayout from './EmptyLayout';
-import { Skeleton, VStack } from '@chakra-ui/react';
-import ScheduledCheckInformation from './ScheduledCheckInformation';
+import { Skeleton, Box } from '@chakra-ui/react';
+import ScheduledCheckCard from './ScheduledCheckCard';
 
 type Props = {
     webpageUrl?: string;
@@ -13,30 +13,31 @@ export default function ScheduledChecks({ webpageUrl, _isEditing }: Props) {
     const { data: scheduledChecks, isLoading: isLoadingChecks } = useFetchScheduledChecksQuery(webpageUrl ? { url: webpageUrl } : skipToken);
 
     return (
-        <VStack align="stretch">
+        <Box>
             {scheduledChecks && scheduledChecks.length === 0 && <EmptyLayout />}
             <Skeleton
                 loading={isLoadingChecks}
                 borderRadius="md"
+                width="100%"
             >
                 {scheduledChecks &&
                     scheduledChecks.length > 0 &&
-                    scheduledChecks.map((check, index) => (
-                        <ScheduledCheckInformation
+                    scheduledChecks.map((check) => (
+                        <ScheduledCheckCard
                             key={`${check.guid}#${_isEditing}`}
                             guid={check.guid}
-                            index={index}
+                            webpageUrl={webpageUrl}
                             createdAt={check.c_at}
-                            interval={check.interval}
+                            frequency={check.interval}
                             timeout={check.configuration.timeout}
                             days={check.days}
-                            zones={check.configuration.zones}
+                            regions={check.configuration.zones}
                             acceptedStatus={check.configuration.accepted_status}
                             checkString={check.configuration.check_string}
                             _isEditing={_isEditing}
                         />
                     ))}
             </Skeleton>
-        </VStack>
+        </Box>
     );
 }

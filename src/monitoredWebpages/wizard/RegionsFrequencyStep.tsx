@@ -1,33 +1,11 @@
-import { Flex, Button, Fieldset, CheckboxGroup, Checkbox, For, RadioGroup, VStack, Select, Portal, createListCollection, HStack, Text } from '@chakra-ui/react';
+import { AVAILABLE_DAY_FILTERS, AVAILABLE_REGIONS, FREQUENCY_LIST } from '@/config';
+import { Flex, Button, Fieldset, CheckboxGroup, Checkbox, For, RadioGroup, VStack, Select, Portal, HStack, Text } from '@chakra-ui/react';
 import { RefObject, useMemo, useState } from 'react';
 
 const initialValidationErrors = {
     regions: [],
     dayFilter: [],
     frequency: [],
-};
-
-const availableRegions = {
-    america: 'Americas',
-    europe: 'Europe',
-    asia_pacific: 'Asia Pacific',
-};
-
-const availableFrequencies = createListCollection({
-    items: [
-        { label: 'minute', value: '1m' },
-        { label: '2 minutes', value: '2m' },
-        { label: '5 minutes', value: '5m' },
-        { label: '10 minutes', value: '10m' },
-        { label: '15 minutes', value: '15m' },
-        { label: 'half an hour', value: '30m' },
-    ],
-});
-
-const availableDayFilters = {
-    all: 'Everyday',
-    weekdays: 'Only weekdays',
-    weekend: 'Only on the weekend',
 };
 
 type Props = {
@@ -78,7 +56,7 @@ export default function RegionsFrequencyStep({
             hasErrors = true;
         }
 
-        if (!Object.keys(availableDayFilters).includes(dayFilter)) {
+        if (!Object.keys(AVAILABLE_DAY_FILTERS).includes(dayFilter)) {
             setValidationErrors((_) => ({ ..._, dayFilter: ['Please select a valid filter'] }));
             hasErrors = true;
         }
@@ -95,8 +73,8 @@ export default function RegionsFrequencyStep({
         onStepFinish();
     };
 
-    const regionKeys = useMemo(() => Object.keys(availableRegions), []);
-    const dayFilterKeys = useMemo(() => Object.keys(availableDayFilters), []);
+    const regionKeys = useMemo(() => Object.keys(AVAILABLE_REGIONS), []);
+    const dayFilterKeys = useMemo(() => Object.keys(AVAILABLE_DAY_FILTERS), []);
 
     return (
         <Flex
@@ -125,7 +103,7 @@ export default function RegionsFrequencyStep({
                                 >
                                     <Checkbox.HiddenInput />
                                     <Checkbox.Control />
-                                    <Checkbox.Label>{availableRegions[region]}</Checkbox.Label>
+                                    <Checkbox.Label>{AVAILABLE_REGIONS[region]}</Checkbox.Label>
                                 </Checkbox.Root>
                             )}
                         </For>
@@ -157,7 +135,7 @@ export default function RegionsFrequencyStep({
                                 >
                                     <RadioGroup.ItemHiddenInput />
                                     <RadioGroup.ItemIndicator />
-                                    <RadioGroup.ItemText>{availableDayFilters[filter]}</RadioGroup.ItemText>
+                                    <RadioGroup.ItemText>{AVAILABLE_DAY_FILTERS[filter]}</RadioGroup.ItemText>
                                 </RadioGroup.Item>
                             )}
                         </For>
@@ -168,7 +146,7 @@ export default function RegionsFrequencyStep({
 
             <Fieldset.Root invalid={validationErrors.frequency?.length > 0}>
                 <Select.Root
-                    collection={availableFrequencies}
+                    collection={FREQUENCY_LIST}
                     value={[frequency]}
                     onValueChange={(event) => handleFrequencyChange(event.value[0])}
                 >
@@ -189,7 +167,7 @@ export default function RegionsFrequencyStep({
                     <Portal container={contentRef}>
                         <Select.Positioner>
                             <Select.Content>
-                                {availableFrequencies.items.map((frequency) => (
+                                {FREQUENCY_LIST.items.map((frequency) => (
                                     <Select.Item
                                         item={frequency}
                                         key={frequency.value}

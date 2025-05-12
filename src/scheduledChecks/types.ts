@@ -31,3 +31,19 @@ export type AddScheduledCheckParams = {
     accepted_status: string[];
     timeout: number;
 };
+
+export type UpdateScheduledCheckParams = {
+    guid: string;
+    url: string;
+    interval?: string;
+    days?: string;
+    zones?: string[];
+    check_string?: string | null;
+    accepted_status?: string[];
+    timeout?: number;
+};
+
+export type DeleteScheduledCheckParams = {
+    url: string;
+    guid: string;
+};

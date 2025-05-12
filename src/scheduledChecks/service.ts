@@ -1,7 +1,7 @@
 import authAndRefetchBaseQuery from '@/auth/utils/authAndRefetchBaseQuery';
 import { BACKEND_BASE_URL } from '@/config';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ScheduledCheck, AddScheduledCheckParams, FetchScheduledChecksParams } from './types';
+import { ScheduledCheck, AddScheduledCheckParams, FetchScheduledChecksParams, UpdateScheduledCheckParams, DeleteScheduledCheckParams } from './types';
 
 const SCHEDULED_CHECKS_REFETCH = 60 * 60 * 6;
 const SCHEDULED_CHECKS_BASE_URL = `${BACKEND_BASE_URL}/task`;
@@ -45,7 +45,47 @@ export const scheduledChecksApi = createApi({
                 return [{ type: 'ScheduledCheck', id: 'LIST' }];
             },
         }),
+
+        updateScheduledCheck: builder.mutation<ScheduledCheck, UpdateScheduledCheckParams>({
+            query: (args) => {
+                const { guid, ...rest } = args;
+
+                return {
+                    url: `/check/${guid}`,
+                    method: 'PATCH',
+                    body: rest,
+                };
+            },
+
+            invalidatesTags: (result, error, _args) => {
+                if (error) {
+                    return [];
+                }
+
+                return [{ type: 'ScheduledCheck', id: 'LIST' }];
+            },
+        }),
+
+        deleteScheduledCheck: builder.mutation<void, DeleteScheduledCheckParams>({
+            query: (args) => {
+                const { url, guid } = args;
+
+                return {
+                    method: 'DELETE',
+                    url: `/check?url=${encodeURIComponent(url)}&guid=${guid}`,
+                };
+            },
+
+            invalidatesTags: (result, error, _args) => {
+                if (error) {
+                    return [];
+                }
+
+                return [{ type: 'ScheduledCheck', id: 'LIST' }];
+            },
+        }),
     }),
 });
 
-export const { useFetchScheduledChecksQuery, useAddScheduledCheckMutation } = scheduledChecksApi;
+export const { useFetchScheduledChecksQuery, useAddScheduledCheckMutation, useUpdateScheduledCheckMutation, useDeleteScheduledCheckMutation } =
+    scheduledChecksApi;

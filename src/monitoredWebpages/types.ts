@@ -9,3 +9,7 @@ export type MonitoredWebpage = {
 export type AddMonitoredWebpageParams = {
     url: string;
 };
+
+export type DeleteMonitoredWebpageParams = {
+    url: string;
+};

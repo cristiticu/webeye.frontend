@@ -1,6 +1,6 @@
 import { BACKEND_BASE_URL } from '@/config';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { AddMonitoredWebpageParams, MonitoredWebpage } from './types';
+import { AddMonitoredWebpageParams, DeleteMonitoredWebpageParams, MonitoredWebpage } from './types';
 import authAndRefetchBaseQuery from '@/auth/utils/authAndRefetchBaseQuery';
 
 const MONITORED_WEBPAGES_REFETCH = 60 * 60 * 2;
@@ -43,7 +43,26 @@ export const monitoredWebpagesApi = createApi({
                 return [{ type: 'MonitoredWebpage', id: 'LIST' }];
             },
         }),
+
+        deleteMonitoredWebpage: builder.mutation<void, DeleteMonitoredWebpageParams>({
+            query: (args) => {
+                const { url } = args;
+
+                return {
+                    method: 'DELETE',
+                    url: `?url=${encodeURIComponent(url)}`,
+                };
+            },
+
+            invalidatesTags: (result, error, _args) => {
+                if (error) {
+                    return [];
+                }
+
+                return [{ type: 'MonitoredWebpage', id: 'LIST' }];
+            },
+        }),
     }),
 });
 
-export const { useFetchMonitoredWebpagesQuery, useAddMonitoredWebpageMutation } = monitoredWebpagesApi;
+export const { useFetchMonitoredWebpagesQuery, useAddMonitoredWebpageMutation, useDeleteMonitoredWebpageMutation } = monitoredWebpagesApi;

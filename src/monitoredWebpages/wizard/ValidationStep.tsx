@@ -1,20 +1,11 @@
-import { Flex, Button, createListCollection, Fieldset, Select, Portal, Field, Input, Badge } from '@chakra-ui/react';
+import { RESPONSE_STATUS_LIST } from '@/config';
+import { Flex, Button, Fieldset, Select, Portal, Field, Input, Badge } from '@chakra-ui/react';
 import { RefObject, useState } from 'react';
 
 const initialValidationErrors = {
     responseStatuses: [],
     timeout: [],
 };
-
-const availableResponseStatuses = createListCollection({
-    items: [
-        { label: '1xx', value: '1xx' },
-        { label: '2xx', value: '2xx' },
-        { label: '3xx', value: '3xx' },
-        { label: '4xx', value: '4xx' },
-        { label: '5xx', value: '5xx' },
-    ],
-});
 
 type Props = {
     responseStatuses: string[];
@@ -85,7 +76,7 @@ export default function ValidationStep({
         >
             <Fieldset.Root invalid={validationErrors.responseStatuses?.length > 0}>
                 <Select.Root
-                    collection={availableResponseStatuses}
+                    collection={RESPONSE_STATUS_LIST}
                     value={responseStatuses}
                     onValueChange={(event) => handleResponseStatusesChange(event.value)}
                     multiple
@@ -104,7 +95,7 @@ export default function ValidationStep({
                     <Portal container={contentRef}>
                         <Select.Positioner>
                             <Select.Content>
-                                {availableResponseStatuses.items.map((status) => (
+                                {RESPONSE_STATUS_LIST.items.map((status) => (
                                     <Select.Item
                                         item={status}
                                         key={status.value}
