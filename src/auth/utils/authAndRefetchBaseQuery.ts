@@ -5,6 +5,7 @@ import { login } from '../slice';
 import { LoginResponse } from '../types';
 import { setCookieJson } from '@/shared/utils';
 import logout from './logout';
+import { toaster } from '@/components/ui/toaster';
 
 type AuthBaseQueryParams = {
     baseUrl: string;
@@ -62,6 +63,10 @@ export default function authAndRefetchBaseQuery({ baseUrl }: Params) {
 
             if (refreshResponse.error) {
                 dispatch(logout());
+                toaster.create({
+                    type: 'error',
+                    title: 'An authentication error has occurred.',
+                });
 
                 return response;
             }

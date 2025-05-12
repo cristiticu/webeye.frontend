@@ -34,7 +34,7 @@ export default function MonitoredWebpageTab({ guid, url }: Props) {
                         <Menu.Content>
                             <Menu.Item
                                 value="settings"
-                                onClick={() => navigate(`/monitors/edit?w_guid=${guid}`)}
+                                onClick={() => navigate(`/monitors?w_guid=${guid}`, { state: { isEditing: true } })}
                             >
                                 <Icon>
                                     <AiOutlineControl />

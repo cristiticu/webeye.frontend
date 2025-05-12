@@ -18,6 +18,10 @@ export type ScheduledCheck = {
     c_at: string;
 };
 
+export type FetchScheduledChecksParams = {
+    url: string;
+};
+
 export type AddScheduledCheckParams = {
     url: string;
     interval: string;

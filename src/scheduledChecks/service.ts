@@ -1,7 +1,7 @@
 import authAndRefetchBaseQuery from '@/auth/utils/authAndRefetchBaseQuery';
 import { BACKEND_BASE_URL } from '@/config';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ScheduledCheck, AddScheduledCheckParams } from './types';
+import { ScheduledCheck, AddScheduledCheckParams, FetchScheduledChecksParams } from './types';
 
 const SCHEDULED_CHECKS_REFETCH = 60 * 60 * 6;
 const SCHEDULED_CHECKS_BASE_URL = `${BACKEND_BASE_URL}/task`;
@@ -15,6 +15,19 @@ export const scheduledChecksApi = createApi({
     tagTypes: ['ScheduledCheck'],
 
     endpoints: (builder) => ({
+        fetchScheduledChecks: builder.query<ScheduledCheck[], FetchScheduledChecksParams>({
+            query: (args) => {
+                const { url } = args;
+
+                return {
+                    method: 'GET',
+                    url: `/check?url=${encodeURIComponent(url)}`,
+                };
+            },
+
+            providesTags: [{ type: 'ScheduledCheck', id: 'LIST' }],
+        }),
+
         addScheduledCheck: builder.mutation<ScheduledCheck, AddScheduledCheckParams>({
             query: (args) => {
                 return {
@@ -35,4 +48,4 @@ export const scheduledChecksApi = createApi({
     }),
 });
 
-export const { useAddScheduledCheckMutation } = scheduledChecksApi;
+export const { useFetchScheduledChecksQuery, useAddScheduledCheckMutation } = scheduledChecksApi;
