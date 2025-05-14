@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 import { Link as RouterLink } from 'react-router-dom';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 
-const now = DateTime.now().toUTC();
+const now = DateTime.now();
 const startAt = now.minus({ hours: 1 });
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function RecentEventsCard({ webpageUrl }: Props) {
-    const { events, isLoadingEvents } = useGetMonitoringEvents({ url: webpageUrl, startAt, endAt: now.endOf('day'), maxEvents: 5 });
+    const { events, isLoadingEvents } = useGetMonitoringEvents({ url: webpageUrl, startAt, endAt: now, maxEvents: 5 });
 
     return (
         <VStack

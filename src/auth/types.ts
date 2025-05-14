@@ -37,3 +37,14 @@ export type RegisterResponse = {
     l_name: string;
     c_at: string;
 };
+
+export type ChangePasswordParams = {
+    old_password: string;
+    new_password: string;
+};
+
+export type ChangePasswordResponse = {
+    access_token: string;
+    refresh_token: string;
+    token_type: string;
+};

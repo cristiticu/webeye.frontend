@@ -4,7 +4,13 @@ import { Box, VStack, Button } from '@chakra-ui/react';
 import { IconType } from 'react-icons/lib';
 
 type Props = {
-    menuItems: Record<string, string>;
+    menuItems: Record<
+        string,
+        {
+            label: string;
+            hidden: boolean;
+        }
+    >;
     menuIcons?: Record<string, IconType>;
     selectedMenu: string;
 };
@@ -35,22 +41,24 @@ export default function MenuBar({ menuItems, selectedMenu, menuIcons }: Props) {
                 flex="1"
                 gap="0"
             >
-                {Object.keys(menuItems).map((item) => (
-                    <Button
-                        background={selectedMenu === item ? 'bg.emphasized' : undefined}
-                        key={item}
-                        variant="ghost"
-                        justifyContent="flex-start"
-                        colorScheme="gray"
-                        px={6}
-                        py={4}
-                        borderRadius={0}
-                        onClick={() => navigate(`/${item}`)}
-                    >
-                        {menuIcons[item] && menuIcons[item]({})}
-                        {menuItems[item]}
-                    </Button>
-                ))}
+                {Object.keys(menuItems)
+                    .filter((item) => !menuItems[item].hidden)
+                    .map((item) => (
+                        <Button
+                            background={selectedMenu === item ? 'bg.emphasized' : undefined}
+                            key={item}
+                            variant="ghost"
+                            justifyContent="flex-start"
+                            colorScheme="gray"
+                            px={6}
+                            py={4}
+                            borderRadius={0}
+                            onClick={() => navigate(`/${item}`)}
+                        >
+                            {menuIcons[item] && menuIcons[item]({})}
+                            {menuItems[item].label}
+                        </Button>
+                    ))}
             </VStack>
         </Box>
     );

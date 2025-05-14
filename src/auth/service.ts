@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BACKEND_BASE_URL } from '@/config';
-import { LoginResponse, LoginParams, RegisterResponse, RegisterParams } from './types';
+import { LoginResponse, LoginParams, RegisterResponse, RegisterParams, ChangePasswordResponse, ChangePasswordParams } from './types';
+import { authBaseQuery } from './utils/authAndRefetchBaseQuery';
 
 export const authApi = createApi({
     reducerPath: 'api.auth',
@@ -33,7 +34,29 @@ export const authApi = createApi({
                 };
             },
         }),
+
+        changePassword: builder.mutation<ChangePasswordResponse, ChangePasswordParams>({
+            queryFn: async (args, api, extraOptions) => {
+                const baseQuery = authBaseQuery({ baseUrl: BACKEND_BASE_URL });
+
+                const response = await baseQuery(
+                    {
+                        url: '/auth/change-password',
+                        method: 'POST',
+                        body: args,
+                    },
+                    api,
+                    extraOptions
+                );
+
+                if (response.data) {
+                    return { data: response.data as ChangePasswordResponse };
+                }
+
+                return { error: response.error };
+            },
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useChangePasswordMutation } = authApi;

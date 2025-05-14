@@ -1,15 +1,13 @@
 import useGetDowntimes from '@/monitoringEvents/hooks/useGetDowntimes';
-import { Box, Flex, Heading, HStack, Link, Skeleton, StackSeparator, VStack } from '@chakra-ui/react';
+import { Flex, Heading, Link, Skeleton, StackSeparator, VStack } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { Link as RouterLink } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useFetchGeneralContextQuery } from '@/monitoringEvents/service';
 import { skipToken } from '@reduxjs/toolkit/query/react';
+import DowntimeTicks from '@/monitoringEvents/DowntimeTicks';
 
-const now = DateTime.now().toUTC();
-const currentHour = now.toLocal().hour;
-
-const ticks = Array.from({ length: 24 });
+const now = DateTime.now();
 
 type Props = {
     webpageUrl?: string;
@@ -50,6 +48,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
     );
 
     const allDowntimeHours = [...currentDowntimeHours, ...downtimeHours];
+    const downtimePercent = allDowntimeHours.length / (now.hour + 1);
 
     const isLoading = isLoadingDowntimes || isLoadingGeneralContext;
 
@@ -63,7 +62,7 @@ export default function UptimeCard({ webpageUrl }: Props) {
                 justifyContent="space-between"
                 width="100%"
             >
-                <Heading alignSelf="self-start">Today&apos;s Uptime</Heading>
+                <Heading alignSelf="self-start">Today&apos;s Uptime: {(100 - downtimePercent).toFixed(0)}%</Heading>
                 <Link asChild>
                     <RouterLink to="/downtime">See All</RouterLink>
                 </Link>
@@ -73,35 +72,8 @@ export default function UptimeCard({ webpageUrl }: Props) {
                 variant="pulse"
                 loading={isLoading}
             >
-                <HStack
-                    align="center"
-                    justify="center"
-                    alignSelf="baseline"
-                    gap="8px"
-                >
-                    {ticks.map((_, index) => {
-                        const isDowntime = allDowntimeHours?.includes(index);
-                        const isInFuture = index > currentHour;
-
-                        return (
-                            <Box
-                                key={index}
-                                width="12px"
-                                height="36px"
-                                backgroundColor={isInFuture ? 'gray.300' : isDowntime ? 'red.500' : 'green.500'}
-                                borderRadius="4px"
-                            />
-                        );
-                    })}
-                </HStack>
+                <DowntimeTicks downtimeHours={allDowntimeHours} />
             </Skeleton>
         </VStack>
     );
 }
-
-//  <Text
-//     fontSize="xs"
-//     color="gray.500"
-// >
-//     {((index + 11) % 12) + 1} {index > 12 ? 'PM' : 'AM'}
-// </Text>

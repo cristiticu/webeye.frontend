@@ -11,8 +11,8 @@ type Props = {
 };
 
 export default function useGetMonitoringEvents({ url, startAt, endAt, maxEvents }: Props) {
-    const formattedStartAt = endAt.startOf('day').toISO();
-    const formattedEndAt = endAt.endOf('day').toISO();
+    const formattedStartAt = endAt.minus({ hours: 2 }).set({ minute: 0, second: 0, millisecond: 0 }).toUTC().toISO();
+    const formattedEndAt = endAt.plus({ hours: 2 }).set({ minute: 0, second: 0, millisecond: 0 }).toUTC().toISO();
 
     const { data: eventsForDay, isLoading: isLoadingEvents } = useFetchEventsQuery(
         url ? { url, start_at: formattedStartAt, end_at: formattedEndAt } : skipToken

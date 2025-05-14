@@ -33,7 +33,7 @@ export default function UserMenuButton() {
                     <Menu.Content>
                         <Menu.Item
                             value="settings"
-                            onClick={() => navigate(`/account/settings`)}
+                            onClick={() => navigate(`/account`)}
                         >
                             <Icon>
                                 <AiOutlineProfile />

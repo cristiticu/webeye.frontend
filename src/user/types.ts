@@ -6,6 +6,8 @@ export type User = {
     c_at: string;
 };
 
-export type FetchUserParams = {
-    guid: string;
+export type UpdateUserParams = {
+    email?: string;
+    f_name?: string;
+    l_name?: string;
 };

@@ -7,6 +7,7 @@ import Layout from './components/layout/Layout';
 import DashboardPage from './dashboard/routes/DashboardPage';
 import ScheduledChecksPage from './scheduledChecks/routes/ScheduledChecksPage';
 import AddScheduledCheckPage from './scheduledChecks/routes/AddScheduledCheckPage';
+import UserAccountPage from './user/routes/UserAccountPage';
 
 export default function App() {
     return (
@@ -39,6 +40,10 @@ export default function App() {
                             <Route
                                 path="/monitors/add"
                                 element={<AddScheduledCheckPage />}
+                            />
+                            <Route
+                                path="/account"
+                                element={<UserAccountPage />}
                             />
                         </Route>
                     </Route>

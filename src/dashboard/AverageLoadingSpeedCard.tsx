@@ -3,7 +3,7 @@ import useGetMonitoringEvents from '@/monitoringEvents/hooks/useGetMonitoringEve
 import { Heading, Skeleton, StackSeparator, Text, VStack } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
-const now = DateTime.now().toUTC();
+const now = DateTime.now();
 const startAt = now.minus({ hours: 1 });
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function AverageLoadingSpeedCard({ webpageUrl }: Props) {
-    const { events, isLoadingEvents } = useGetMonitoringEvents({ url: webpageUrl, startAt, endAt: now.endOf('day'), maxEvents: 5 });
+    const { events, isLoadingEvents } = useGetMonitoringEvents({ url: webpageUrl, startAt, endAt: now, maxEvents: 5 });
 
     const averageLoadingSpeed =
         events && events.length > 0

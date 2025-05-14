@@ -62,7 +62,7 @@ export default function RegisterForm() {
         }
 
         if (passwordVerify !== password) {
-            setValidationErrors((_) => ({ ..._, passwordVerify: ["Password don't match"] }));
+            setValidationErrors((_) => ({ ..._, passwordVerify: ["Passwords don't match"] }));
             hasErrors = true;
         }
 

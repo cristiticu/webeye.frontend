@@ -1,18 +1,21 @@
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch } from '@/store';
 import { useFetchUserQuery } from '../service';
-import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useEffect } from 'react';
 import logout from '@/auth/utils/logout';
+import { toaster } from '@/components/ui/toaster';
 
 export default function useGetAuthenticatedUser() {
     const dispatch = useAppDispatch();
-    const userGuid = useAppSelector((state) => state.auth.userGuid);
 
-    const { data: user, error: userError, isLoading } = useFetchUserQuery(userGuid ? { guid: userGuid } : skipToken);
+    const { data: user, error: userError, isLoading } = useFetchUserQuery();
 
     useEffect(() => {
         if (userError) {
             dispatch(logout());
+            toaster.create({
+                type: 'error',
+                title: 'Error retrieving user',
+            });
         }
     }, [dispatch, userError]);
 

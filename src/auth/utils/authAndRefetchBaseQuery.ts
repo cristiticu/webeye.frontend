@@ -11,7 +11,7 @@ type AuthBaseQueryParams = {
     baseUrl: string;
 };
 
-function authBaseQuery({ baseUrl }: AuthBaseQueryParams) {
+export function authBaseQuery({ baseUrl }: AuthBaseQueryParams) {
     return fetchBaseQuery({
         baseUrl,
         prepareHeaders: (headers, api) => {

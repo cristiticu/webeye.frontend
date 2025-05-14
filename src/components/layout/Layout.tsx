@@ -5,9 +5,10 @@ import MenuBar from './MenuBar';
 import { AiFillSnippets, AiFillSignal, AiFillEye } from 'react-icons/ai';
 
 const menuItems = {
-    dashboard: 'Dashboard',
-    monitors: 'Monitors',
-    events: 'Events & Downtimes',
+    dashboard: { label: 'Dashboard', hidden: false },
+    monitors: { label: 'Monitors', hidden: false },
+    events: { label: 'Events & Downtimes', hidden: false },
+    account: { label: 'User Account', hidden: true },
 };
 
 const menuIcons = {
@@ -21,7 +22,7 @@ export default function Layout() {
 
     const selectedMenu = location.pathname.split('/')[1];
 
-    const pageTitle = menuItems[selectedMenu] || 'Page not found';
+    const pageTitle = menuItems[selectedMenu].label || 'Page not found';
 
     return (
         <Flex height="100vh">
