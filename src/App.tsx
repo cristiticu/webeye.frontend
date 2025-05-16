@@ -8,6 +8,9 @@ import DashboardPage from './dashboard/routes/DashboardPage';
 import ScheduledChecksPage from './scheduledChecks/routes/ScheduledChecksPage';
 import AddScheduledCheckPage from './scheduledChecks/routes/AddScheduledCheckPage';
 import UserAccountPage from './user/routes/UserAccountPage';
+import EventsPage from './monitoringEvents/routes/EventsPage';
+import DowntimesPage from './monitoringEvents/routes/DowntimesPage';
+import EventDetailsPage from './monitoringEvents/routes/EventDetailsPage';
 
 export default function App() {
     return (
@@ -32,6 +35,18 @@ export default function App() {
                             <Route
                                 path="/dashboard"
                                 element={<DashboardPage />}
+                            />
+                            <Route
+                                path="/event"
+                                element={<EventsPage />}
+                            />
+                            <Route
+                                path="/event/:region/:createdAt"
+                                element={<EventDetailsPage />}
+                            />
+                            <Route
+                                path="/downtimes"
+                                element={<DowntimesPage />}
                             />
                             <Route
                                 path="/monitors"

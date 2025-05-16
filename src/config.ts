@@ -3,28 +3,36 @@ import { createListCollection } from '@chakra-ui/react';
 export const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
 export const SCREENSHOT_STORAGE_URL = import.meta.env.VITE_SCREENSHOT_STORAGE_URL || '';
 export const HAR_STORAGE_URL = import.meta.env.VITE_HAR_STORAGE_URL || '';
+export const HAR_VIEWER_URL = import.meta.env.VITE_HAR_VIEWER_URL || '';
 
 export const GENERAL_CONTEXT_LONG_POLLING_MS = 60 * 1000;
 export const REGIONS_STATUS_LONG_POLLING_MS = 60 * 1000;
 
+export const METRIC_THRESHOLDS = {
+    'dom-content-loaded': { type: 'time', good: 2000, medium: 4000 },
+    'time-to-first-byte': { type: 'time', good: 800, medium: 1800 },
+    'first-contentful-paint': { type: 'time', good: 1800, medium: 3000 },
+    'cumulative-layout-shift': { type: 'score', good: 0.1, medium: 0.25 },
+};
+
 export const REGION_DATA = {
-    'us-east-1': { name: 'North Virginia' },
-    'us-east-2': { name: 'Ohio' },
-    'us-west-1': { name: 'North California' },
-    'us-west-2': { name: 'Oregon' },
-    'ca-central-1': { name: 'Canada' },
-    'sa-east-1': { name: 'Sao Paulo' },
-    'ap-south-1': { name: 'Mumbai' },
-    'ap-southeast-1': { name: 'Singapore' },
-    'ap-southeast-2': { name: 'Sydney' },
-    'ap-northeast-1': { name: 'Tokyo' },
-    'ap-northeast-2': { name: 'Seoul' },
-    'ap-northeast-3': { name: 'Osaka' },
-    'eu-central-1': { name: 'Frankfurt' },
-    'eu-west-1': { name: 'Ireland' },
-    'eu-west-2': { name: 'London' },
-    'eu-west-3': { name: 'Paris' },
-    'eu-north-1': { name: 'Stockholm' },
+    'us-east-1': { name: 'North Virginia', countryCode: 'US', title: 'United States' },
+    'us-east-2': { name: 'Ohio', countryCode: 'US', title: 'United States' },
+    'us-west-1': { name: 'North California', countryCode: 'US', title: 'United States' },
+    'us-west-2': { name: 'Oregon', countryCode: 'US', title: 'United States' },
+    'ca-central-1': { name: 'Canada', countryCode: 'CA', title: 'Canada' },
+    'sa-east-1': { name: 'Sao Paulo', countryCode: 'BR', title: 'Brazil' },
+    'ap-south-1': { name: 'Mumbai', countryCode: 'IN', title: 'India' },
+    'ap-southeast-1': { name: 'Singapore', countryCode: 'SG', title: 'Singapore' },
+    'ap-southeast-2': { name: 'Sydney', countryCode: 'AU', title: 'Australia' },
+    'ap-northeast-1': { name: 'Tokyo', countryCode: 'JP', title: 'Japan' },
+    'ap-northeast-2': { name: 'Seoul', countryCode: 'KR', title: 'South Korea' },
+    'ap-northeast-3': { name: 'Osaka', countryCode: 'JP', title: 'Japan' },
+    'eu-central-1': { name: 'Frankfurt', countryCode: 'DE', title: 'Germany' },
+    'eu-west-1': { name: 'Ireland', countryCode: 'IE', title: 'Ireland' },
+    'eu-west-2': { name: 'London', countryCode: 'GB', title: 'United Kingdom' },
+    'eu-west-3': { name: 'Paris', countryCode: 'FR', title: 'France' },
+    'eu-north-1': { name: 'Stockholm', countryCode: 'SE', title: 'Sweden' },
 };
 
 export const AVAILABLE_FREQUENCIES = {
@@ -33,7 +41,7 @@ export const AVAILABLE_FREQUENCIES = {
     '5m': '5 minutes',
     '10m': '10 minutes',
     '15m': '15 minutes',
-    '30m': 'half an hour',
+    '30m': '30 minutes',
 };
 
 export const FREQUENCY_LIST = createListCollection({

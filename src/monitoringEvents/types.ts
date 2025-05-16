@@ -36,8 +36,19 @@ export type GeneralContext = {
 
 export type FetchEventsParams = {
     url: string;
-    start_at: string;
-    end_at: string;
+    last_evaluated_key?: string;
+};
+
+export type FetchEventsResponse = {
+    data: MonitoringEvent[];
+    meta: {
+        last_evaluated_key: string | null;
+    };
+};
+
+export type FetchEventParams = {
+    url: string;
+    c_at: string;
 };
 
 export type FetchDowntimesParams = {

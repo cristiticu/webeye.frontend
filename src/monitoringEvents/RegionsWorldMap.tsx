@@ -87,6 +87,7 @@ export default function RegionsWorldMap({ regionsStatus, width, height }: Props)
                                 <Popover.Positioner>
                                     <Popover.Content>
                                         <RegionTooltip
+                                            region={key}
                                             regionName={name}
                                             status={regionsStatus[key]?.status || 'unknown'}
                                             error={regionsStatus[key]?.error}

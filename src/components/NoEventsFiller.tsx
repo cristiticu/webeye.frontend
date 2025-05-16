@@ -5,7 +5,6 @@ export default function NoEventsFiller() {
     return (
         <Flex
             w="100%"
-            h="300px"
             borderRadius="md"
             bg="gray.100"
             direction="column"

@@ -2,12 +2,15 @@ import { Heading, StackSeparator, VStack } from '@chakra-ui/react';
 import { useAddScheduledCheckMutation } from './service';
 import ScheduledCheckInput from './ScheduledCheckInput';
 import { toaster } from '@/components/ui/toaster';
+import { usePreservedNavigate } from '@/shared/hooks/usePreservedNavigate';
 
 type Props = {
     webpageUrl: string;
 };
 
 export default function AddScheduledCheck({ webpageUrl }: Props) {
+    const navigate = usePreservedNavigate();
+
     const [addScheduledCheck, { isLoading: isAddingScheduledCheck }] = useAddScheduledCheckMutation();
 
     const handleAddScheduledCheck = async (
@@ -28,6 +31,8 @@ export default function AddScheduledCheck({ webpageUrl }: Props) {
                 timeout: timeout * 1000,
                 accepted_status: acceptedStatus,
             }).unwrap();
+
+            navigate('/monitors');
 
             toaster.create({
                 type: 'success',

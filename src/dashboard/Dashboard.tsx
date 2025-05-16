@@ -4,7 +4,7 @@ import ScreenshotCard from './ScreenshotCard';
 import MapCard from './MapCard';
 import CurrentStatusCard from './CurrentStatusCard';
 import RecentEventsCard from './RecentEventsCard';
-import AverageLoadingSpeedCard from './AverageLoadingSpeedCard';
+import AverageStatisticsCard from './AverageStatisticsCard';
 import UptimeCard from './UptimeCard';
 
 type Props = {
@@ -65,7 +65,7 @@ export default function Dashboard({ webpageGuid, webpageUrl }: Props) {
                 borderRadius="xl"
                 p={4}
             >
-                <AverageLoadingSpeedCard webpageUrl={webpageUrl} />
+                <AverageStatisticsCard webpageUrl={webpageUrl} />
             </GridItem>
 
             <GridItem

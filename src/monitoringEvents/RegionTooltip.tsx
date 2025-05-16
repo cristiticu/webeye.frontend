@@ -1,26 +1,22 @@
 import { Box, Link, Text } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
 import { usePreservedNavigate } from '@/shared/hooks/usePreservedNavigate';
 import { formatPrettyTimestamp } from '@/shared/utils';
 
 type Props = {
+    region: string;
     regionName: string;
     status: string;
     lastUpdated: string | null;
     error: string | null;
 };
 
-export default function RegionTooltip({ regionName, status, lastUpdated, error }: Props) {
-    const location = useLocation();
+export default function RegionTooltip({ region, regionName, status, lastUpdated, error }: Props) {
     const navigate = usePreservedNavigate();
 
     const formattedLastUpdated = lastUpdated && formatPrettyTimestamp(lastUpdated);
 
     const handleEventClick = () => {
-        let search = location.search;
-
-        search += `&timestamp=${encodeURIComponent(lastUpdated)}`;
-        navigate('/event-details', search);
+        navigate(`/event/${region}/${encodeURIComponent(lastUpdated)}`);
     };
 
     return (

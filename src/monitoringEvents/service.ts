@@ -4,7 +4,9 @@ import {
     CurrentStatus,
     DowntimePeriod,
     FetchDowntimesParams,
+    FetchEventParams,
     FetchEventsParams,
+    FetchEventsResponse,
     FetchGeneralContextParams,
     FetchRegionsStatusParams,
     GeneralContext,
@@ -24,24 +26,37 @@ export const monitoringEventsApi = createApi({
     tagTypes: ['MonitoringEvent', 'DowntimePeriod'],
 
     endpoints: (builder) => ({
-        fetchEvents: builder.query<MonitoringEvent[], FetchEventsParams>({
+        fetchEvents: builder.query<FetchEventsResponse, FetchEventsParams>({
             query: (args) => {
-                const { url, start_at, end_at } = args;
+                const { url, last_evaluated_key } = args;
 
                 return {
                     method: 'GET',
-                    url: `?url=${encodeURIComponent(url)}&start_at=${encodeURIComponent(start_at)}&end_at=${encodeURIComponent(end_at)}`,
+                    url: `/list?url=${encodeURIComponent(url)}${last_evaluated_key ? `&last_evaluated_key=${last_evaluated_key}` : ''}`,
                 };
             },
 
-            providesTags: (result, error, args) => [
+            keepUnusedDataFor: 60 * 60 * 2,
+
+            providesTags: (_result, _error, _args) => [
                 {
                     type: 'MonitoringEvent',
-                    id: `${args.url}#${args.end_at}`,
+                    id: 'PARTIAL-LIST',
                 },
             ],
+        }),
 
-            keepUnusedDataFor: 60 * 60 * 2,
+        fetchEvent: builder.query<MonitoringEvent, FetchEventParams>({
+            query: (args) => {
+                const { url, c_at } = args;
+
+                return {
+                    method: 'GET',
+                    url: `?url=${encodeURIComponent(url)}&c_at=${encodeURIComponent(c_at)}`,
+                };
+            },
+
+            keepUnusedDataFor: 60 * 60 * 8,
         }),
 
         fetchDowntimes: builder.query<DowntimePeriod[], FetchDowntimesParams>({
@@ -88,4 +103,4 @@ export const monitoringEventsApi = createApi({
     }),
 });
 
-export const { useFetchDowntimesQuery, useFetchEventsQuery, useFetchGeneralContextQuery, useFetchRegionsStatusQuery } = monitoringEventsApi;
+export const { useFetchDowntimesQuery, useFetchEventsQuery, useFetchGeneralContextQuery, useFetchEventQuery, useFetchRegionsStatusQuery } = monitoringEventsApi;

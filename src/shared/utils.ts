@@ -40,3 +40,9 @@ export function formatDetailedTimestamp(timestamp: string): string {
 
     return dt.toFormat('HH:mm:ss');
 }
+
+export function formatDetailedDayTimestamp(timestamp: string): string {
+    const dt = DateTime.fromISO(timestamp);
+
+    return dt.toFormat('dd/MM/yyyy HH:mm:ss');
+}

@@ -1,21 +1,21 @@
 import NoEventsFiller from '@/components/NoEventsFiller';
 import { REGION_DATA } from '@/config';
-import useGetMonitoringEvents from '@/monitoringEvents/hooks/useGetMonitoringEvents';
 import { formatDetailedTimestamp } from '@/shared/utils';
 import { Heading, Icon, Link, Skeleton, StackSeparator, Timeline, VStack } from '@chakra-ui/react';
-import { DateTime } from 'luxon';
 import { Link as RouterLink } from 'react-router-dom';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
-
-const now = DateTime.now();
-const startAt = now.minus({ hours: 1 });
+import { useFetchEventsQuery } from '@/monitoringEvents/service';
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import { useMemo } from 'react';
 
 type Props = {
     webpageUrl?: string;
 };
 
 export default function RecentEventsCard({ webpageUrl }: Props) {
-    const { events, isLoadingEvents } = useGetMonitoringEvents({ url: webpageUrl, startAt, endAt: now, maxEvents: 5 });
+    const { data: monitoringEvents, isLoading: isLoadingEvents } = useFetchEventsQuery(webpageUrl ? { url: webpageUrl } : skipToken);
+
+    const events = useMemo(() => (monitoringEvents ? monitoringEvents.data.slice(0, 5) : undefined), [monitoringEvents]);
 
     return (
         <VStack
