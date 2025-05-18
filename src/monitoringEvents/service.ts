@@ -36,7 +36,7 @@ export const monitoringEventsApi = createApi({
                 };
             },
 
-            keepUnusedDataFor: 60 * 60 * 2,
+            keepUnusedDataFor: 60 * 5,
 
             providesTags: (_result, _error, _args) => [
                 {

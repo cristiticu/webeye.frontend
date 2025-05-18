@@ -1,3 +1,4 @@
+import { METRIC_THRESHOLDS } from '@/config';
 import { getCookie, setCookie } from './cookie';
 import { DateTime } from 'luxon';
 
@@ -45,4 +46,14 @@ export function formatDetailedDayTimestamp(timestamp: string): string {
     const dt = DateTime.fromISO(timestamp);
 
     return dt.toFormat('dd/MM/yyyy HH:mm:ss');
+}
+
+export function getColor(value: number, metric: string): string {
+    const thresholds = METRIC_THRESHOLDS[metric];
+
+    if (!thresholds) return 'gray.500';
+
+    if (value <= thresholds.good) return 'green.500';
+    if (value <= thresholds.medium) return 'yellow.500';
+    return 'red.500';
 }

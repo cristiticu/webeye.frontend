@@ -1,20 +1,10 @@
 import NoEventsFiller from '@/components/NoEventsFiller';
-import { METRIC_THRESHOLDS } from '@/config';
 import { useFetchEventsQuery } from '@/monitoringEvents/service';
 import { calculateAverageMeasurement } from '@/monitoringEvents/utils';
+import { getColor } from '@/shared/utils';
 import { Heading, HStack, Skeleton, StackSeparator, Text, VStack } from '@chakra-ui/react';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useMemo } from 'react';
-
-function getColor(value: number, metric: string): string {
-    const thresholds = METRIC_THRESHOLDS[metric];
-
-    if (!thresholds) return 'gray.400';
-
-    if (value <= thresholds.good) return 'green.500';
-    if (value <= thresholds.medium) return 'yellow.500';
-    return 'red.500';
-}
 
 type Props = {
     webpageUrl?: string;

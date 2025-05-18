@@ -9,10 +9,41 @@ export const GENERAL_CONTEXT_LONG_POLLING_MS = 60 * 1000;
 export const REGIONS_STATUS_LONG_POLLING_MS = 60 * 1000;
 
 export const METRIC_THRESHOLDS = {
-    'dom-content-loaded': { type: 'time', good: 2000, medium: 4000 },
-    'time-to-first-byte': { type: 'time', good: 800, medium: 1800 },
-    'first-contentful-paint': { type: 'time', good: 1800, medium: 3000 },
-    'cumulative-layout-shift': { type: 'score', good: 0.1, medium: 0.25 },
+    'dom-interactive': {
+        type: 'time',
+        good: 1500,
+        medium: 3000,
+    },
+    'load-duration': {
+        type: 'time',
+        good: 2500,
+        medium: 5000,
+    },
+    'first-paint': {
+        type: 'time',
+        good: 1000,
+        medium: 2000,
+    },
+    'dom-content-loaded': {
+        type: 'time',
+        good: 2000,
+        medium: 4000,
+    },
+    'time-to-first-byte': {
+        type: 'time',
+        good: 800,
+        medium: 1800,
+    },
+    'first-contentful-paint': {
+        type: 'time',
+        good: 1800,
+        medium: 3000,
+    },
+    'cumulative-layout-shift': {
+        type: 'score',
+        good: 0.1,
+        medium: 0.25,
+    },
 };
 
 export const REGION_DATA = {

@@ -40,14 +40,19 @@ export default function EventsTable({ events, nextDisabled, previousDisabled, on
                         <Tooltip
                             key={item.c_at}
                             positioning={{ placement: 'top' }}
-                            content="Click to view"
+                            content={item.status === 'up' ? 'Click to view' : 'No data'}
                         >
                             <Table.Row
-                                onClick={() => onEventClick(item.region, item.c_at)}
-                                _hover={{ background: 'gray.200 !important', cursor: 'pointer' }}
+                                onClick={item.status === 'up' ? () => onEventClick(item.region, item.c_at) : undefined}
+                                _hover={item.status === 'up' ? { background: 'gray.200 !important', cursor: 'pointer' } : undefined}
                                 transition="background-color 0.2s"
                             >
-                                <Table.Cell>{formatDetailedDayTimestamp(item.c_at)}</Table.Cell>
+                                <Table.Cell
+                                    color={item.status === 'up' ? 'blue.500' : 'inherit'}
+                                    _hover={item.status === 'up' ? { textDecoration: 'underline' } : undefined}
+                                >
+                                    {formatDetailedDayTimestamp(item.c_at)}
+                                </Table.Cell>
                                 <Table.Cell>
                                     <HStack>
                                         <CountryFlag
