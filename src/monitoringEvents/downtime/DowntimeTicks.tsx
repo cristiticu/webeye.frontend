@@ -2,15 +2,17 @@ import { Tooltip } from '@/components/ui/tooltip';
 import { Box, HStack, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
-const currentHour = DateTime.now().hour;
-
 const ticks = Array.from({ length: 24 });
 
 type Props = {
+    date: DateTime;
     downtimeHours: number[];
 };
 
-export default function DowntimeTicks({ downtimeHours }: Props) {
+export default function DowntimeTicks({ date, downtimeHours }: Props) {
+    const currentHour = DateTime.now().hour;
+    const isToday = date.hasSame(DateTime.now(), 'day');
+
     return (
         <HStack
             align="center"
@@ -20,7 +22,7 @@ export default function DowntimeTicks({ downtimeHours }: Props) {
         >
             {ticks.map((_, index) => {
                 const isDowntime = downtimeHours?.includes(index);
-                const isInFuture = index > currentHour;
+                const isInFuture = isToday && index > currentHour;
 
                 return (
                     <Tooltip

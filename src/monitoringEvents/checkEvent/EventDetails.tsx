@@ -1,7 +1,7 @@
 import { Flex, Heading, StackSeparator, Text, VStack } from '@chakra-ui/react';
 import PageResources from './PageResources';
 import EventResults from './EventResults';
-import { useFetchEventQuery } from './service';
+import { useFetchEventQuery } from '../service';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { formatDetailedDayTimestamp } from '@/shared/utils';
 import { REGION_DATA } from '@/config';

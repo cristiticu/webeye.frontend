@@ -71,7 +71,7 @@ export default function RegisterForm() {
         }
 
         await register(email, firstName, lastName || undefined, password);
-        navigate('/dashboard');
+        navigate('/account/onboarding');
     };
 
     return (

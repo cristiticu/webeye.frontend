@@ -1,7 +1,7 @@
 import useCurrentWebpageState from '@/monitoredWebpages/hooks/useCurrentWebpageState';
 import MonitoredWebpages from '@/monitoredWebpages/MonitoredWebpages';
 import { Container } from '@chakra-ui/react';
-import MonitoringEvents from '../MonitoringEvents';
+import MonitoringEvents from '../checkEvent/MonitoringEvents';
 
 export default function EventsPage() {
     const { webpage } = useCurrentWebpageState();

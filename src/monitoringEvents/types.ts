@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 export type MonitoringEvent = {
     u_guid: string;
     url: string;
@@ -71,4 +73,10 @@ export type RegionsStatus = {
         lastUpdated: string | null;
         error: string | null;
     };
+};
+
+export type GenericDowntime = {
+    startAt: DateTime;
+    endAt: DateTime;
+    error: string;
 };

@@ -1,5 +1,5 @@
 import { Box, Button, Heading, HStack, StackSeparator, Table, VStack } from '@chakra-ui/react';
-import { MonitoringEvent } from './types';
+import { MonitoringEvent } from '../types';
 import { formatDetailedDayTimestamp } from '@/shared/utils';
 import { Tooltip } from '@/components/ui/tooltip';
 import { REGION_DATA } from '@/config';

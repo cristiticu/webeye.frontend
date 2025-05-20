@@ -1,5 +1,5 @@
 import NoEventsFiller from '@/components/NoEventsFiller';
-import { REGION_DATA } from '@/config';
+import { REGION_DATA, REGIONS_STATUS_LONG_POLLING_MS } from '@/config';
 import { formatDetailedTimestamp } from '@/shared/utils';
 import { Heading, Icon, Link, Skeleton, StackSeparator, Timeline, VStack } from '@chakra-ui/react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
@@ -14,7 +14,9 @@ type Props = {
 
 export default function RecentEventsCard({ webpageUrl }: Props) {
     const navigate = usePreservedNavigate();
-    const { data: monitoringEvents, isLoading: isLoadingEvents } = useFetchEventsQuery(webpageUrl ? { url: webpageUrl } : skipToken);
+    const { data: monitoringEvents, isLoading: isLoadingEvents } = useFetchEventsQuery(webpageUrl ? { url: webpageUrl } : skipToken, {
+        pollingInterval: REGIONS_STATUS_LONG_POLLING_MS,
+    });
 
     const events = useMemo(() => (monitoringEvents ? monitoringEvents.data.slice(0, 5) : undefined), [monitoringEvents]);
 

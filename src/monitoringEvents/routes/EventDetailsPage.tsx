@@ -1,7 +1,7 @@
 import useCurrentWebpageState from '@/monitoredWebpages/hooks/useCurrentWebpageState';
 import { Container } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import EventDetails from '../EventDetails';
+import EventDetails from '../checkEvent/EventDetails';
 import useGetAuthenticatedUser from '@/user/hooks/useGetAuthenticatedUser';
 
 export default function EventDetailsPage() {

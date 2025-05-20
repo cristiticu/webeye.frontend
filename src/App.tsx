@@ -11,6 +11,7 @@ import UserAccountPage from './user/routes/UserAccountPage';
 import EventsPage from './monitoringEvents/routes/EventsPage';
 import DowntimesPage from './monitoringEvents/routes/DowntimesPage';
 import EventDetailsPage from './monitoringEvents/routes/EventDetailsPage';
+import UserOnboardingPage from './user/routes/UserOnboardingPage';
 
 export default function App() {
     return (
@@ -31,6 +32,11 @@ export default function App() {
                     />
 
                     <Route element={<ProtectedRoutes />}>
+                        <Route
+                            path="/account/onboarding"
+                            element={<UserOnboardingPage />}
+                        />
+
                         <Route element={<Layout />}>
                             <Route
                                 path="/dashboard"

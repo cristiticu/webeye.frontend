@@ -1,6 +1,6 @@
 import { Box, Skeleton } from '@chakra-ui/react';
 import EventsTable from './EventsTable';
-import { useFetchEventsQuery } from './service';
+import { useFetchEventsQuery } from '../service';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { usePreservedNavigate } from '@/shared/hooks/usePreservedNavigate';
 import { useState } from 'react';
