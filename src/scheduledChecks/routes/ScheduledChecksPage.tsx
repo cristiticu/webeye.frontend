@@ -9,10 +9,7 @@ export default function ScheduledChecksPage() {
     const { webpage } = useCurrentWebpageState();
 
     return (
-        <Container
-            paddingTop={6}
-            position="absolute"
-        >
+        <Container className="page-container">
             <MonitoredWebpages>
                 <ScheduledChecks
                     key={webpage?.guid || 'no-website'}

@@ -1,3 +1,4 @@
+import './ScreenshotCard.less';
 import NoEventsFiller from '@/components/NoEventsFiller';
 import { SCREENSHOT_STORAGE_URL } from '@/config';
 import { Heading, Image, Skeleton, StackSeparator, VStack } from '@chakra-ui/react';
@@ -15,26 +16,23 @@ export default function ScreenshotCard({ webpageGuid, userGuid }: Props) {
 
     return (
         <VStack
+            height="100%"
             gap={2}
             separator={<StackSeparator />}
         >
             <Heading alignSelf="self-start">Welcome to Webeye</Heading>
 
             <Skeleton
+                className="screenshot-skeleton"
                 loading={!hasDataForScreenshot}
-                width="100%"
-                height="300px"
             >
                 {!screenshotError && (
                     <Image
-                        loading="lazy"
+                        className="webpage-screenshot"
                         src={`${SCREENSHOT_STORAGE_URL}/${userGuid}/${webpageGuid}.jpg`}
                         alt="Webpage screenshot"
-                        borderRadius="lg"
-                        objectFit="cover"
+                        loading="lazy"
                         onError={() => setScreenshotError(true)}
-                        w="100%"
-                        h="100%"
                     />
                 )}
 

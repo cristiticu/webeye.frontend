@@ -7,10 +7,7 @@ export default function EventsPage() {
     const { webpage } = useCurrentWebpageState();
 
     return (
-        <Container
-            paddingTop={6}
-            position="absolute"
-        >
+        <Container className="page-container">
             <MonitoredWebpages>
                 <MonitoringEvents webpageUrl={webpage?.url} />
             </MonitoredWebpages>

@@ -55,11 +55,11 @@ export default function App() {
                                 element={<DowntimesPage />}
                             />
                             <Route
-                                path="/monitors"
+                                path="/settings"
                                 element={<ScheduledChecksPage />}
                             />
                             <Route
-                                path="/monitors/add"
+                                path="/settings/add"
                                 element={<AddScheduledCheckPage />}
                             />
                             <Route

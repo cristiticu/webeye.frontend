@@ -3,10 +3,7 @@ import UserAccount from '../UserAccount';
 
 export default function UserAccountPage() {
     return (
-        <Container
-            paddingTop={6}
-            position="absolute"
-        >
+        <Container className="page-container">
             <UserAccount />
         </Container>
     );

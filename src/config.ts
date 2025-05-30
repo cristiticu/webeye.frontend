@@ -39,6 +39,11 @@ export const METRIC_THRESHOLDS = {
         good: 1800,
         medium: 3000,
     },
+    'largest-contentful-paint': {
+        type: 'time',
+        good: 2500,
+        medium: 4000,
+    },
     'cumulative-layout-shift': {
         type: 'score',
         good: 0.1,

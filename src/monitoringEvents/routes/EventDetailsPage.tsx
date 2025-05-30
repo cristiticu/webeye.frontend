@@ -11,10 +11,7 @@ export default function EventDetailsPage() {
     const { user } = useGetAuthenticatedUser();
 
     return (
-        <Container
-            paddingTop={6}
-            position="absolute"
-        >
+        <Container className="page-container">
             <EventDetails
                 userGuid={user?.guid}
                 webpageGuid={webpage?.guid}

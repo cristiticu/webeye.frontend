@@ -31,7 +31,7 @@ export default function EmptyLayout() {
                     global locations across 3 continents. Stay ahead of downtime with precise, distributed checks and diagnose loading issues with no hassle.
                 </Text>
 
-                <Button onClick={() => navigate('/monitors/add')}>Create Your Monitor</Button>
+                <Button onClick={() => navigate('/settings/add')}>Create Your Monitor</Button>
             </VStack>
         </Box>
     );

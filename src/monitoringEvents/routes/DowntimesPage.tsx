@@ -7,10 +7,7 @@ export default function DowntimesPage() {
     const { webpage } = useCurrentWebpageState();
 
     return (
-        <Container
-            paddingTop={6}
-            position="absolute"
-        >
+        <Container className="page-container">
             <MonitoredWebpages>
                 <Downtimes webpageUrl={webpage?.url} />
             </MonitoredWebpages>

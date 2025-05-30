@@ -32,7 +32,7 @@ export default function AddScheduledCheck({ webpageUrl }: Props) {
                 accepted_status: acceptedStatus,
             }).unwrap();
 
-            navigate('/monitors');
+            navigate('/settings');
 
             toaster.create({
                 type: 'success',
